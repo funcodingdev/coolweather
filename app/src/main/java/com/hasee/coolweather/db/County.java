@@ -2,7 +2,7 @@ package com.hasee.coolweather.db;
 
 import org.litepal.crud.DataSupport;
 
-public class Country extends DataSupport {
+public class County extends DataSupport {
     private int id;//县id
     private String countryName;//县名
     private String weatherId;//该县的天气Id
