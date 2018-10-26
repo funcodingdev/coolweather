@@ -1,5 +1,6 @@
 package com.hasee.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.hasee.coolweather.gson.Forecast;
 import com.hasee.coolweather.gson.Weather;
+import com.hasee.coolweather.service.AutoUpdateService;
 import com.hasee.coolweather.util.HttpUtil;
 import com.hasee.coolweather.util.Utility;
 
@@ -223,6 +225,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(WeatherActivity.this,AutoUpdateService.class);
+        startService(intent);
         Toast.makeText(WeatherActivity.this,"天气更新成功",Toast.LENGTH_SHORT).show();
     }
 }
