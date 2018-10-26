@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.hasee.coolweather.db.City;
 import com.hasee.coolweather.db.County;
 import com.hasee.coolweather.db.Province;
+import com.hasee.coolweather.gson.Weather;
 import com.hasee.coolweather.util.HttpUtil;
 import com.hasee.coolweather.util.Utility;
 
@@ -98,10 +99,17 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounties();
                 }else if(currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(i).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if(getActivity() instanceof MainActivity){//碎片现在所在的Activity对象属于MainActivity吗？
+                        Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if(getActivity() instanceof WeatherActivity){//碎片现在所在的Activity对象属于WeatherActivity吗？
+                        WeatherActivity activity = (WeatherActivity)getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });

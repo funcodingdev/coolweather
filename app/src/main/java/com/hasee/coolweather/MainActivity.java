@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        if(prefs.getString("weather",null)!=null){
+        if(prefs.getString("weather",null)!=null){//判断缓存中是否有数据，有的话直接跳转天气显示页面，否则进入选择城市页面
             Intent intent = new Intent(MainActivity.this,WeatherActivity.class);
             startActivity(intent);
             finish();
